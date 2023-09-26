@@ -72,7 +72,7 @@ proxy-groups:
   - { name: "manual", type: select, use: ["usa"]}
 proxy-providers:
 
-  usa: { type: http, url: "https://raw.githubusercontent.com/MEHR1DAD/ClashVPN/main/node/us.yml", interval: 86400, path: ./providers/us.yaml, health-check: { enable: true, interval: 3600, lazy: true, url: "http://detectportal.firefox.com/success.txt" }}
+  usa: { type: http, url: "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/base64/mix", interval: 86400, path: ./providers/us.yaml, health-check: { enable: true, interval: 3600, lazy: true, url: "http://detectportal.firefox.com/success.txt" }}
 
   
 rule-providers:
