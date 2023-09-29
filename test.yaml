@@ -113,9 +113,9 @@ rules:
   - DOMAIN-KEYWORD,snapp,DIRECT
   - DOMAIN,yacd.metacubex.one,DIRECT ## Yet Another Clash Dashbord for Clash.Meta
   - DOMAIN,clash.metacubex.one,DIRECT ## Razord
-  - RULE-SET,YouTube,global
-  - RULE-SET,YouTubeMusic,global
-  - RULE-SET,Threads,global
+  - RULE-SET,YouTube,♻️Trojan-SG
+  - RULE-SET,YouTubeMusic,♻️Trojan-SG
+  - RULE-SET,Threads,♻️Trojan-SG
   - RULE-SET,OpenAI,DIRECT
   - RULE-SET,Claude,DIRECT
   - RULE-SET,Anthropic,DIRECT
