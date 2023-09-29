@@ -66,15 +66,26 @@ dns:
     nameserver: ['8.8.4.4', '1.0.0.1']
     nameserver-policy: {"RULE-SET:ir,ircidr,geoip:ir,+.ir,+.bonyan.co": ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"], "RULE-SET:Claude,Anthropic,OpenAI": ["https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"]}
     
-proxy-groups:
-  - { name: "global", type: select, proxies: ["♻️Auto","manual"]}
-  - { name: "♻️Auto", type: url-test, url: http://www.gstatic.com/generate_204, interval: 300, tolerance: 800, use: ["usa"]}
-  - { name: "manual", type: select, use: ["usa"]}
 proxy-providers:
+  Trojan-SG:
+    type: file
+    url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge_yaml.yml"
+    path: ./trojan_sg.yaml
+    health-check:
+      enable: true
+      interval: 86400
+      url: 'http://www.gstatic.com/generate_204'
 
-  usa: { type: http, url:"https://raw.githubusercontent.com/mahdibland/SSAggregator/master/sub/sub_merge_yaml.yml", interval: 86400, path: ./providers/us.yaml, health-check: { enable: true, interval: 3600, lazy: true, url: "http://detectportal.firefox.com/success.txt" }}
-
-  
+proxy-groups:
+  - name: ♻️Trojan-SG
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 800
+    lazy: false
+    use:
+      - Trojan-SG
+      
 rule-providers:
   ir: {type: http, format: text, behavior: domain, path: ./ruleset/ir.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ir.txt, interval: 86400}
   ads: {type: http, format: text, behavior: domain, path: ./ruleset/ads.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ads.txt, interval: 86400}
@@ -116,4 +127,4 @@ rules:
   - RULE-SET,cryptominers,REJECT
   - RULE-SET,ir,DIRECT
   - RULE-SET,ircidr,DIRECT
-  - MATCH,♻️Auto
+  - MATCH,♻️Trojan-SG
