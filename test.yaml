@@ -32,15 +32,11 @@ sniffer:
   skip-domain:
       - Mijia Cloud
       - dlg.io.mi.com
-  # 需要嗅探协议
-  # 已废弃，若 sniffer.sniff 配置则此项无效
+
   sniffing:
     - tls
     - http
-  # 强制对此域名进行嗅探
-  
-  # 仅对白名单中的端口进行嗅探，默认为 443，80
-  # 已废弃，若 sniffer.sniff 配置则此项无效
+
   port-whitelist:
     - "80"
     - "443"
@@ -103,6 +99,13 @@ proxy-providers:
       url: 'http://www.gstatic.com/generate_204'
 
 proxy-groups:
+
+  - name: 🚀 Select
+    type: select
+    proxies:
+      - ♻️Trojan-SG
+      - ♻️Trojan-SG2
+      
   - name: ♻️Trojan-SG
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -152,9 +155,9 @@ rules:
   - DOMAIN-KEYWORD,snapp,DIRECT
   - DOMAIN,yacd.metacubex.one,DIRECT ## Yet Another Clash Dashbord for Clash.Meta
   - DOMAIN,clash.metacubex.one,DIRECT ## Razord
-  - RULE-SET,YouTube,🐟 Slip
-  - RULE-SET,YouTubeMusic,🐟 Slip
-  - RULE-SET,Threads,🐟 Slip
+  - RULE-SET,YouTube,🚀 Select
+  - RULE-SET,YouTubeMusic,🚀 Select
+  - RULE-SET,Threads,🚀 Select
   - RULE-SET,ads,REJECT
   - RULE-SET,malware,REJECT
   - RULE-SET,phishing,REJECT
