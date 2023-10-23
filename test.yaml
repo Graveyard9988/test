@@ -1,21 +1,22 @@
-mixed-port: 7890
+port: 7890
+socks-port: 7891
 allow-lan: true
-tcp-concurrent: true
-enable-process: true
-find-process-mode: always
-mode: rule
-log-level: error ## silent/error/warning/info/debug
+mode: Rule
+log-level: info
 ipv6: true
 external-controller: 127.0.0.1:9090
 experimental:
   ignore-resolve-fail: true
   sniff-tls-sni: true
-  tracing: true
 hosts:
   "localhost": 127.0.0.1
+
 profile:
+  # 存储 select 选择记录
   store-selected: true
+  # 持久化 fake-ip
   store-fake-ip: true
+  tracing: true
 
 sniffer:
   enable: true
@@ -31,12 +32,15 @@ sniffer:
   skip-domain:
       - Mijia Cloud
       - dlg.io.mi.com
-
+  # 需要嗅探协议
+  # 已废弃，若 sniffer.sniff 配置则此项无效
   sniffing:
     - tls
     - http
-
-
+  # 强制对此域名进行嗅探
+  
+  # 仅对白名单中的端口进行嗅探，默认为 443，80
+  # 已废弃，若 sniffer.sniff 配置则此项无效
   port-whitelist:
     - "80"
     - "443"
@@ -53,18 +57,27 @@ tun:
   auto-redir: true
   auto-route: true
   auto-detect-interface: true
+  strict-route: false
+  inet4-route-address:
+    - 0.0.0.0/1
+    - 128.0.0.0/1
+  inet6-route-address:
+    - '::/1'
+    - '8000::/1'
+  exclude-package:
+    - chat.delta
 
 
 dns:
     enable: true
     ipv6: true
-    default-nameserver: ['1.1.1.1', '8.8.8.8']
+    default-nameserver: ['1.1.1.1', '1.0.0.1']
     enhanced-mode: fake-ip
     fake-ip-range: '198.18.0.1/16'
     fake-ip-filter: ["stun.*.*", "stun.*.*.*", "+.stun.*.*", "+.stun.*.*.*", "+.stun.*.*.*.*", "+.stun.*.*.*.*.*", "*.lan", "+.msftncsi.com", "msftconnecttest.com", "time?.*.com", "time.*.com", "time.*.gov", "time.*.apple.com", "time-ios.apple.com", "time1.*.com", "time2.*.com", "time3.*.com", "time4.*.com", "time5.*.com", "time6.*.com", "time7.*.com", "ntp?.*.com", "ntp.*.com", "ntp1.*.com", "ntp2.*.com", "ntp3.*.com", "ntp4.*.com", "ntp5.*.com", "ntp6.*.com", "ntp7.*.com", "+.pool.ntp.org", "+.ipv6.microsoft.com", "speedtest.cros.wr.pvp.net", "network-test.debian.org", "detectportal.firefox.com", "cable.auth.com", "miwifi.com", "routerlogin.com", "routerlogin.net", "tendawifi.com", "tendawifi.net", "tplinklogin.net", "tplinkwifi.net", "*.xiami.com", "tplinkrepeater.net", "router.asus.com", "*.*.*.srv.nintendo.net", "*.*.stun.playstation.net", "*.openwrt.pool.ntp.org", "resolver1.opendns.com", "GC._msDCS.*.*", "DC._msDCS.*.*", "PDC._msDCS.*.*"]
     use-hosts: true
-    nameserver: ['8.8.4.4', '1.0.0.1']
-    nameserver-policy: {"RULE-SET:ir,ircidr,geoip:ir,+.ir,+.bonyan.co": ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"]
+    nameserver: ["https://51196e53.d.adguard-dns.com/dns-query", "https://adblock.dns.mullvad.net/dns-query"]
+    nameserver-policy: {"RULE-SET:ir,ircidr,private,apps,geoip:ir,+.ir,+.bonyan.co": ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"], "RULE-SET:OpenAI": ["https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"]}
     remote-nameserver: ["https://dns8.org/dns-query"]
     proxy-server-nameserver: ["https://dns.ipv6dns.com/dns-query", "https://dns.secarchlab.net/dns-query"]
     
@@ -107,6 +120,7 @@ proxy-groups:
     lazy: false
     use:
       - Trojan-SG2
+      
   - name: 🐟 Slip
     type: select
     proxies:
@@ -138,15 +152,15 @@ rules:
   - DOMAIN-KEYWORD,snapp,DIRECT
   - DOMAIN,yacd.metacubex.one,DIRECT ## Yet Another Clash Dashbord for Clash.Meta
   - DOMAIN,clash.metacubex.one,DIRECT ## Razord
-  - RULE-SET,YouTube,♻️Trojan-SG
-  - RULE-SET,YouTubeMusic,♻️Trojan-SG
-  - RULE-SET,Threads,♻️Trojan-SG
-  - RULE-SET,apps,DIRECT
+  - RULE-SET,YouTube,🐟 Slip
+  - RULE-SET,YouTubeMusic,🐟 Slip
+  - RULE-SET,Threads,🐟 Slip
   - RULE-SET,ads,REJECT
   - RULE-SET,malware,REJECT
   - RULE-SET,phishing,REJECT
   - RULE-SET,cryptominers,REJECT
+  - RULE-SET,apps,DIRECT
   - RULE-SET,private,DIRECT
   - RULE-SET,ir,DIRECT
   - RULE-SET,ircidr,DIRECT
-  - MATCH,♻️Trojan-SG
+  - MATCH,🐟 Slip
