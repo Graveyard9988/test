@@ -98,7 +98,20 @@ proxy-groups:
     lazy: false
     use:
       - Trojan-SG
+
+  - name: ♻️Trojan-SG2
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 800
+    lazy: false
+    use:
       - Trojan-SG2
+  - name: 🐟 Slip
+    type: select
+    proxies:
+      - ♻️Trojan-SG
+      - ♻️Trojan-SG2
       
 rule-providers:
   ir: {type: http, format: text, behavior: domain, path: ./ruleset/ir.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ir.txt, interval: 86400}
