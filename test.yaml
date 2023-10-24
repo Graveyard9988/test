@@ -77,7 +77,7 @@ dns:
     
 proxy-providers:
   Trojan-SG:
-    type: file
+    type: http
     url: "https://raw.githubusercontent.com/vveg26/chromego_merge/main/sub/merged_proxies_new.yaml"
     interval: 3600
     path: ./trojan_sg.yaml
@@ -87,8 +87,8 @@ proxy-providers:
       url: 'http://www.gstatic.com/generate_204'
 
   Trojan-SG2:
-    type: file
-    url: "https://raw.githubusercontent.com/MEHR1DAD/ClashVPN/main/node/gb.yml"
+    type: http
+    url: "https://raw.githubusercontent.com/ali322/OSCN/master/screenshot/meta.yaml"
     interval: 3600
     path: ./trojan_sg2.yaml
     health-check:
