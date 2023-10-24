@@ -100,7 +100,7 @@ proxy-providers:
 
 proxy-groups:
 
-- { name: "global", type: select, proxies: ["♻️Auto","manual"]}
+  - { name: "global", type: select, proxies: ["♻️Auto","manual"]}
   - { name: "♻️Auto", type: url-test, url: http://www.gstatic.com/generate_204, interval: 300, tolerance: 800, use: ["♻️Trojan-SG","♻️Trojan-SG2"]}
   - { name: "manual", type: select, use: ["♻️Trojan-SG","♻️Trojan-SG2"]}
   
