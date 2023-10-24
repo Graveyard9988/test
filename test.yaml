@@ -90,7 +90,7 @@ proxy-providers:
 
   Trojan-SG2:
     type: file
-    url: "https://raw.githubusercontent.com/MEHR1DAD/ClashVPN/main/conn/GermanyNetherlandsFranceUk-light.yaml"
+    url: "https://raw.githubusercontent.com/MEHR1DAD/ClashVPN/main/node/gb.yml"
     interval: 3600
     path: ./trojan_sg.yaml
     health-check:
