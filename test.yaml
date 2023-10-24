@@ -140,4 +140,8 @@ rules:
   - RULE-SET,private,DIRECT
   - RULE-SET,ir,DIRECT
   - RULE-SET,ircidr,DIRECT
+  - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(RULE-SET,YouTube)))),REJECT
+  - AND,((NETWORK,udp),(RULE-SET,YouTube)),REJECT
+  - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(RULE-SET,YouTubeMusic)))),REJECT
+  - AND,((NETWORK,udp),(RULE-SET,YouTubeMusic)),REJECT
   - MATCH,♻️Auto
