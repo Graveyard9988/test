@@ -12,9 +12,7 @@ hosts:
   "localhost": 127.0.0.1
 
 profile:
-  # 存储 select 选择记录
   store-selected: true
-  # 持久化 fake-ip
   store-fake-ip: true
   tracing: true
 
@@ -44,9 +42,9 @@ sniffer:
     
 tun: 
   enable: true
-  prefer-h3: true # 开启 DoH 支持 HTTP/3，将并发尝试
-  listen: 0.0.0.0:53 # 开启 DNS 服务器监听
-  stack: gvisor # or system 
+  prefer-h3: true 
+  listen: 0.0.0.0:53 
+  stack: gvisor 
   dns-hijack:
      - "any:53"
      - "tcp://any:53"
