@@ -92,7 +92,7 @@ proxy-providers:
     type: file
     url: "https://raw.githubusercontent.com/MEHR1DAD/ClashVPN/main/node/gb.yml"
     interval: 3600
-    path: ./trojan_sg.yaml
+    path: ./trojan_sg2.yaml
     health-check:
       enable: true
       interval: 86400
