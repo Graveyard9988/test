@@ -80,7 +80,7 @@ dns:
 proxy-providers:
   Trojan-SG:
     type: file
-    url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge_yaml.yml"
+    url: "https://raw.githubusercontent.com/vveg26/chromego_merge/main/sub/merged_proxies_new.yaml"
     interval: 3600
     path: ./trojan_sg.yaml
     health-check:
@@ -100,35 +100,11 @@ proxy-providers:
 
 proxy-groups:
 
-  - name: 🚀 Select
-    type: select
-    proxies:
-      - ♻️Trojan-SG
-      - ♻️Trojan-SG2
-      
-  - name: ♻️Trojan-SG
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 800
-    lazy: false
-    use:
-      - Trojan-SG
+- { name: "global", type: select, proxies: ["♻️Auto","manual"]}
+  - { name: "♻️Auto", type: url-test, url: http://www.gstatic.com/generate_204, interval: 300, tolerance: 800, use: ["♻️Trojan-SG","♻️Trojan-SG2"]}
+  - { name: "manual", type: select, use: ["♻️Trojan-SG","♻️Trojan-SG2"]}
+  
 
-  - name: ♻️Trojan-SG2
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 800
-    lazy: false
-    use:
-      - Trojan-SG2
-      
-  - name: 🐟 Slip
-    type: select
-    proxies:
-      - ♻️Trojan-SG
-      - ♻️Trojan-SG2
       
 rule-providers:
   ir: {type: http, format: text, behavior: domain, path: ./ruleset/ir.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ir.txt, interval: 86400}
@@ -166,4 +142,4 @@ rules:
   - RULE-SET,private,DIRECT
   - RULE-SET,ir,DIRECT
   - RULE-SET,ircidr,DIRECT
-  - MATCH,🐟 Slip
+  - MATCH,♻️Auto
