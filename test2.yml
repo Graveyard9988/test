@@ -74,7 +74,8 @@ rule-providers:
   ir: {type: http, format: yaml, behavior: domain, path: ./ruleset/ir.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ir.yaml, interval: 86400}
   ads: {type: http, format: yaml, behavior: domain, path: ./ruleset/ads.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ads.yaml, interval: 86400}
   ircidr: {type: http, format: yaml, behavior: ipcidr, path: ./ruleset/ircidr.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ircidr.yaml, interval: 86400}
-
+  private: {type: http, format: yaml, behavior: ipcidr, path: ./ruleset/private.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/private.yaml, interval: 86400}
+  apps: {type: http, format: yaml, behavior: classical, path: ./ruleset/apps.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/apps.yaml, interval: 86400}
 
 
 rules:
