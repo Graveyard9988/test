@@ -91,6 +91,8 @@ rules:
   - DOMAIN,yacd.metacubex.one,DIRECT ## Yet Another Clash Dashbord for Clash.Meta
   - DOMAIN,clash.metacubex.one,DIRECT ## Razord
   - RULE-SET,ads,REJECT
+  - RULE-SET,apps,DIRECT
+  - RULE-SET,private,DIRECT
   - RULE-SET,ir,DIRECT
   - RULE-SET,ircidr,DIRECT
   - MATCH,♻️Auto
