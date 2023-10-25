@@ -39,7 +39,7 @@ dns:
     use-hosts: true
     nameserver: ["https://1.1.1.1/dns-query", "https://adblock.dns.mullvad.net/dns-query"]
 
-
+proxies:
     
 proxy-providers:
   Trojan-SG:
