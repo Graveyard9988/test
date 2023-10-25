@@ -71,9 +71,9 @@ proxy-groups:
 
       
 rule-providers:
-  ir: {type: http, format: text, behavior: domain, path: ./ruleset/ir.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ir.txt, interval: 86400}
-  ads: {type: http, format: text, behavior: domain, path: ./ruleset/ads.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ads.txt, interval: 86400}
-  ircidr: {type: http, format: text, behavior: ipcidr, path: ./ruleset/ircidr.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ircidr.txt, interval: 86400}
+  ir: {type: http, format: yaml, behavior: domain, path: ./ruleset/ir.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ir.yaml, interval: 86400}
+  ads: {type: http, format: yaml, behavior: domain, path: ./ruleset/ads.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ads.yaml, interval: 86400}
+  ircidr: {type: http, format: yaml, behavior: ipcidr, path: ./ruleset/ircidr.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ircidr.yaml, interval: 86400}
 
 
 
