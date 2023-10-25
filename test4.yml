@@ -1,0 +1,99 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: Rule
+log-level: info
+ipv6: true
+external-controller: 127.0.0.1:9090
+experimental:
+  sniff-tls-sni: true
+hosts:
+  "localhost": 127.0.0.1
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+  tracing: true
+
+    
+tun: 
+  enable: true
+  listen: 0.0.0.0:53 
+  stack: gvisor 
+  dns-hijack:
+     - "any:53"
+     - "tcp://any:53"
+  auto-redir: true
+  auto-route: true
+  auto-detect-interface: true
+
+
+
+dns:
+    enable: true
+    ipv6: true
+    default-nameserver: ['1.1.1.1', '8.8.4.4', '127.0.0.1']
+    enhanced-mode: fake-ip
+    fake-ip-range: '198.18.0.1/16'
+    fake-ip-filter: ["stun.*.*", "stun.*.*.*", "+.stun.*.*", "+.stun.*.*.*", "+.stun.*.*.*.*", "+.stun.*.*.*.*.*", "*.lan", "+.msftncsi.com", "msftconnecttest.com", "time?.*.com", "time.*.com", "time.*.gov", "time.*.apple.com", "time-ios.apple.com", "time1.*.com", "time2.*.com", "time3.*.com", "time4.*.com", "time5.*.com", "time6.*.com", "time7.*.com", "ntp?.*.com", "ntp.*.com", "ntp1.*.com", "ntp2.*.com", "ntp3.*.com", "ntp4.*.com", "ntp5.*.com", "ntp6.*.com", "ntp7.*.com", "+.pool.ntp.org", "+.ipv6.microsoft.com", "speedtest.cros.wr.pvp.net", "network-test.debian.org", "detectportal.firefox.com", "cable.auth.com", "miwifi.com", "routerlogin.com", "routerlogin.net", "tendawifi.com", "tendawifi.net", "tplinklogin.net", "tplinkwifi.net", "*.xiami.com", "tplinkrepeater.net", "router.asus.com", "*.*.*.srv.nintendo.net", "*.*.stun.playstation.net", "*.openwrt.pool.ntp.org", "resolver1.opendns.com", "GC._msDCS.*.*", "DC._msDCS.*.*", "PDC._msDCS.*.*"]
+    use-hosts: true
+    nameserver: ["https://1.1.1.1/dns-query", "https://adblock.dns.mullvad.net/dns-query"]
+    nameserver-policy: {"RULE-SET:ir,ircidr,private,apps,geoip:ir,geosite:category-ir,+.ir,+.bonyan.co": ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"]}
+
+proxies:
+    
+proxy-providers:
+  Trojan-SG:
+    type: http
+    url: "https://raw.githubusercontent.com/mfbpn/tg_mfbpn_sub/main/trials_providers/US.yaml"
+    interval: 86400
+    path: ./trojan_sg.yaml
+    health-check:
+      enable: true
+      interval: 3600
+      URL: "http://www.gstatic.com/generate_204"
+
+  Trojan-SG2:
+    type: http
+    url: "https://raw.githubusercontent.com/imyaoxp/x.sub/main/trials_providers/US.yaml"
+    interval: 86400
+    path: ./trojan_sg2.yaml
+    health-check:
+      enable: true
+      interval: 3600
+      URL: "http://www.gstatic.com/generate_204"
+
+proxy-groups:
+
+  - { name: "global", type: select, proxies: ["♻️Auto","manual"]}
+  - { name: "♻️Auto", type: url-test, url: http://www.gstatic.com/generate_204, interval: 300, tolerance: 800, use: ["Trojan-SG","Trojan-SG2"]}
+  - { name: "manual", type: select, use: ["Trojan-SG","Trojan-SG2"]}
+  
+
+      
+rule-providers:
+  ir: {type: http, format: yaml, behavior: domain, path: ./ruleset/ir.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ir.yaml, interval: 86400}
+  ads: {type: http, format: yaml, behavior: domain, path: ./ruleset/ads.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ads.yaml, interval: 86400}
+  ircidr: {type: http, format: yaml, behavior: ipcidr, path: ./ruleset/ircidr.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ircidr.yaml, interval: 86400}
+  private: {type: http, format: yaml, behavior: ipcidr, path: ./ruleset/private.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/private.yaml, interval: 86400}
+  apps: {type: http, format: yaml, behavior: classical, path: ./ruleset/apps.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/apps.yaml, interval: 86400}
+
+
+rules:
+  - DOMAIN-SUFFIX,local,DIRECT
+  - DOMAIN-SUFFIX,ip6-localhost,DIRECT
+  - DOMAIN-SUFFIX,ip6-loopback,DIRECT
+  - DOMAIN-SUFFIX,lan,DIRECT
+  - DOMAIN-SUFFIX,localhost,DIRECT
+  - DOMAIN-SUFFIX,ir,DIRECT
+  - DOMAIN,clash.razord.top,DIRECT
+  - DOMAIN,yacd.haishan.me,DIRECT
+  - DOMAIN-KEYWORD,snapp,DIRECT
+  - DOMAIN,yacd.metacubex.one,DIRECT ## Yet Another Clash Dashbord for Clash.Meta
+  - DOMAIN,clash.metacubex.one,DIRECT ## Razord
+  - RULE-SET,ads,REJECT
+  - RULE-SET,apps,DIRECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,ir,DIRECT
+  - RULE-SET,ircidr,DIRECT
+  - MATCH,♻️Auto
