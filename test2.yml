@@ -44,7 +44,7 @@ proxies:
 proxy-providers:
   Trojan-SG:
     type: http
-    url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/airport_merge_yaml.yml"
+    url: "https://raw.githubusercontent.com/mfbpn/tg_mfbpn_sub/main/trials_providers/US.yaml"
     interval: 86400
     path: ./trojan_sg.yaml
     health-check:
