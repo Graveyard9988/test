@@ -51,7 +51,7 @@ proxy-providers:
     health-check:
       enable: true
       interval: 3600
-      url: 'http://www.gstatic.com/generate_204'
+      URL: "http://www.gstatic.com/generate_204"
 
   Trojan-SG2:
     type: http
@@ -61,7 +61,7 @@ proxy-providers:
     health-check:
       enable: true
       interval: 3600
-      url: 'http://www.gstatic.com/generate_204'
+      URL: "http://www.gstatic.com/generate_204"
 
 proxy-groups:
 
