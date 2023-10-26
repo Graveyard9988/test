@@ -1,6 +1,8 @@
-port: 7890
-socks-port: 7891
-allow-lan: false
+port: 7890           # HTTP 
+socks-port: 7891     # SOCKS5 
+redir-port: 7892     # Linux , macOS 
+mixed-port: 7893      # HTTP&SOCKS5
+allow-lan: true       
 bind-address: '*'
 mode: rule
 log-level: info
@@ -32,6 +34,7 @@ dns:
     use-hosts: true
     nameserver: ["https://8.8.8.8/dns-query", "https://adblock.dns.mullvad.net/dns-query"]
     nameserver-policy: {"RULE-SET:ir,ircidr,private,apps,geoip:ir,+.ir,+.bonyan.co": ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"]}
+    skip-cert-verify: true 
     
 proxy-providers:
   anaer-Sub:
