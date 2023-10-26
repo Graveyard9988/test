@@ -82,23 +82,23 @@ proxy-groups:
   type: url-test
   tolerance: 50
   use: &id002
-  - HK
+  - NL
 - name: GB
   type: url-test
   tolerance: 50
   use: &id003
-  - TW
+  - GB
 
 - name: FL
   type: url-test
   tolerance: 50
   use: &id005
-  - SG
+  - FL
 - name: CA
   type: url-test
   tolerance: 50
   use: &id006
-  - JP
+  - CA
 - name: US
   type: url-test
   tolerance: 50
