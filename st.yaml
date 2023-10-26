@@ -1,0 +1,123 @@
+port: 7890
+socks-port: 7891
+allow-lan: false
+bind-address: '*'
+mode: rule
+log-level: info
+ipv6: false
+http:
+  url-rewrite:
+    - ^http://g\.cn https://www.google.com transparent
+    - ^https?://www\.google\.cn https://www.google.com 302
+    - ^https?://ad\.example - reject
+  header-rewrite:
+    - ^http://g\.cn request-add DNT 1
+    - ^http://g\.cn request-del DNT
+    - ^http://g\.cn request-replace DNT 1
+    - ^http://g\.cn request-replace-regex User-Agent Go-http-client curl
+    - ^http://g\.cn response-add DNT 1
+    - ^http://g\.cn response-del DNT
+    - ^http://g\.cn response-replace DNT 1
+    - ^http://g\.cn response-replace-regex User-Agent Go-http-client curl
+script:
+  shortcuts:
+    quic: network == 'udp' and dst_port == 443
+dns:
+    enable: true
+    ipv6: true
+    default-nameserver: ['1.1.1.1', '1.0.0.1', "system"]
+    enhanced-mode: fake-ip
+    fake-ip-range: '198.18.0.1/16'
+    fake-ip-filter: ["stun.*.*", "stun.*.*.*", "+.stun.*.*", "+.stun.*.*.*", "+.stun.*.*.*.*", "+.stun.*.*.*.*.*", "*.lan", "+.msftncsi.com", "msftconnecttest.com", "time?.*.com", "time.*.com", "time.*.gov", "time.*.apple.com", "time-ios.apple.com", "time1.*.com", "time2.*.com", "time3.*.com", "time4.*.com", "time5.*.com", "time6.*.com", "time7.*.com", "ntp?.*.com", "ntp.*.com", "ntp1.*.com", "ntp2.*.com", "ntp3.*.com", "ntp4.*.com", "ntp5.*.com", "ntp6.*.com", "ntp7.*.com", "+.pool.ntp.org", "+.ipv6.microsoft.com", "speedtest.cros.wr.pvp.net", "network-test.debian.org", "detectportal.firefox.com", "cable.auth.com", "miwifi.com", "routerlogin.com", "routerlogin.net", "tendawifi.com", "tendawifi.net", "tplinklogin.net", "tplinkwifi.net", "*.xiami.com", "tplinkrepeater.net", "router.asus.com", "*.*.*.srv.nintendo.net", "*.*.stun.playstation.net", "*.openwrt.pool.ntp.org", "resolver1.opendns.com", "GC._msDCS.*.*", "DC._msDCS.*.*", "PDC._msDCS.*.*"]
+    use-hosts: true
+    nameserver: ["https://8.8.8.8/dns-query", "https://adblock.dns.mullvad.net/dns-query"]
+    nameserver-policy: {"RULE-SET:ir,ircidr,private,apps,geoip:ir,+.ir,+.bonyan.co": ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"]}
+    
+proxy-providers:
+  anaer-Sub:
+    url: https://anaer.github.io/Sub/clash.yaml
+    interval: 3600
+proxy-groups:
+
+  - name: Selection
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Proxy.png
+    type: select
+    proxies:
+      - Auto
+      - Manual
+      - DIRECT
+  - name: Auto
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png
+    interval: 120
+    lazy: false
+    tolerance: 50
+    type: url-test
+    include-all: true
+
+  - name: Manual
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Static.png
+    interval: 120
+    lazy: true
+    type: select
+    include-all: true
+    
+  - name: Slip
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Final.png
+    type: select
+    proxies:
+      - Selection
+      - DIRECT
+      
+rule-providers:
+  ir: {type: http, format: text, behavior: domain, path: ./ruleset/ir.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ir.txt, interval: 86400}
+  ads: {type: http, format: text, behavior: domain, path: ./ruleset/ads.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ads.txt, interval: 86400}
+  ircidr: {type: http, format: text, behavior: ipcidr, path: ./ruleset/ircidr.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ircidr.txt, interval: 86400}
+  private: {type: http, format: text, behavior: ipcidr, path: ./ruleset/private.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/private.txt, interval: 86400}
+  apps: {type: http, format: text, behavior: domain, path: ./ruleset/apps.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/apps.txt, interval: 86400}
+  malware: {type: http, format: text, behavior: domain, path: ./ruleset/malware.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/malware.txt, interval: 86400}
+  phishing: {type: http, format: text, behavior: domain, path: ./ruleset/phishing.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/phishing.txt, interval: 86400}
+  cryptominers: {type: http, format: text, behavior: domain, path: ./ruleset/cryptominers.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/cryptominers.txt, interval: 86400}
+  OpenAI: {type: http, behavior: classical, path: ./ruleset/OpenAI.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml, interval: 86400}
+  YouTube: {type: http, behavior: classical, path: ./ruleset/YouTube.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml, interval: 86400}
+  YouTubeMusic: {type: http, behavior: classical, path: ./ruleset/YouTubeMusic.yaml, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTubeMusic/YouTubeMusic.yaml, interval: 86400}
+  Cryptocurrency: {type: http, behavior: classical, path: ./ruleset/Cryptocurrency.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Cryptocurrency/Cryptocurrency.yaml, interval: 86400}
+  Instagram: {type: http, behavior: classical, path: ./ruleset/Instagram.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Instagram/Instagram.yaml, interval: 86400}
+  Telegram: {type: http, behavior: classical, path: ./ruleset/Telegram.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml, interval: 86400}
+  Whatsapp: {type: http, behavior: classical, path: ./ruleset/Whatsapp.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Whatsapp/Whatsapp.yaml, interval: 86400}
+  Threads: {type: http, behavior: classical, path: ./ruleset/Threads.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Threads/Threads.yaml, interval: 86400}
+
+rules:
+  - SCRIPT,quic,REJECT
+  - IP-CIDR,127.0.0.1/32,DIRECT,no-resolve
+  - IP-CIDR,198.18.0.1/16,DIRECT,no-resolve
+  - IP-CIDR,28.0.0.1/8,DIRECT,no-resolve
+  - IP-CIDR6,::1/128,DIRECT,no-resolve
+  - DOMAIN-SUFFIX,local,DIRECT
+  - DOMAIN-SUFFIX,ip6-localhost,DIRECT
+  - DOMAIN-SUFFIX,ip6-loopback,🎯 Direct
+  - DOMAIN-SUFFIX,lan,DIRECT
+  - DOMAIN-SUFFIX,localhost,DIRECT
+  - DOMAIN-SUFFIX,ir,DIRECT
+  - DOMAIN-SUFFIX,cloudflare.com,DIRECT
+  - DOMAIN,clash.razord.top,DIRECT
+  - DOMAIN,yacd.haishan.me,DIRECT
+  - RULE-SET,ads,REJECT
+  - RULE-SET,malware,REJECT
+  - RULE-SET,phishing,REJECT
+  - RULE-SET,cryptominers,REJECT
+  - RULE-SET,Cryptocurrency,Selection
+  - RULE-SET,YouTube,Selection
+  - RULE-SET,YouTubeMusic,Selection
+  - RULE-SET,Instagram,Selection
+  - RULE-SET,Whatsapp,Selection
+  - RULE-SET,Telegram,Selection
+  - RULE-SET,Threads,Selection
+  - RULE-SET,apps,DIRECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,ir,DIRECT
+  - RULE-SET,ircidr,DIRECT
+  - GEOIP,LAN,DIRECT
+  - GEOIP,IR,DIRECT
+  - MATCH,Slip
+  
+    
