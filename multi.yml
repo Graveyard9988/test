@@ -1,0 +1,251 @@
+
+mixed-port: 7890
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: :9090
+proxy-groups:
+- name: ✈️ select
+  type: select
+  proxies:
+  - ⚡auto
+  - NL
+  - GB
+  - FL
+  - CA
+  - US
+  - DE
+  - 👆🏻NL
+  - 👆🏻GB
+  - 👆🏻FL
+  - 👆🏻CA
+  - 👆🏻US
+  - 👆🏻DE
+  - DIRECT
+- name: ⚡auto
+  type: url-test
+  tolerance: 50
+  use: &id001
+  - NL
+  - GB
+  - FL
+  - CA
+  - US
+  - DE
+  - Relay
+
+- name: 🛩️ direct
+  type: select
+  proxies:
+  - DIRECT
+
+  - ✈️ select
+- name: 💩 block
+  type: select
+  proxies:
+  - REJECT
+
+- name: 📺 Stream
+  type: select
+  proxies:
+  - NL
+  - GB
+  - DE
+  - 🛩️ direct
+  - 👆🏻NL
+  - 👆🏻GB
+  - 👆🏻DE
+  - ✈️ select
+- name: 🤖 AI
+  type: select
+  proxies:
+  - US
+  - 👆🏻US
+  - GB
+  - FL
+  - CA
+  - DE
+  - 👆🏻GB
+  - 👆🏻FL
+  - 👆🏻CA
+  - 👆🏻DE
+  - ✈️ select
+  - 🛩️ direct
+- name: 🌐 Slip
+  type: select
+  proxies:
+  - ✈️ select
+  - 🛩️ direct
+  - 💩 block
+
+- name: NL
+  type: url-test
+  tolerance: 50
+  use: &id002
+  - HK
+- name: GB
+  type: url-test
+  tolerance: 50
+  use: &id003
+  - TW
+
+- name: FL
+  type: url-test
+  tolerance: 50
+  use: &id005
+  - SG
+- name: CA
+  type: url-test
+  tolerance: 50
+  use: &id006
+  - JP
+- name: US
+  type: url-test
+  tolerance: 50
+  use: &id007
+  - US
+- name: DE
+  type: url-test
+  tolerance: 50
+  use: &id008
+  - DE
+
+- name: 👆🏻NL
+  type: select
+  use: *id002
+- name: 👆🏻GB
+  type: select
+  use: *id003
+- name: 👆🏻FL
+  type: select
+  use: *id005
+- name: 👆🏻CA
+  type: select
+  use: *id006
+- name: 👆🏻US
+  type: select
+  use: *id007
+- name: 👆🏻DE
+  type: select
+  use: *id008
+
+proxy-providers:
+  NL:
+    type: http
+    url: https://raw.githubusercontent.com/MEHR1DAD/ClashVPN/main/node/nl.yml
+    interval: 180
+    path: trials_providers/NL.yaml
+    health-check:
+      enable: true
+      url: https://i.ytimg.com/generate_204
+      interval: 30
+  GB:
+    type: http
+    url: https://raw.githubusercontent.com/MEHR1DAD/ClashVPN/main/node/gb.yml
+    interval: 180
+    path: trials_providers/GB.yaml
+    health-check:
+      enable: true
+      url: https://i.ytimg.com/generate_204
+      interval: 30
+  FL:
+    type: http
+    url: https://raw.githubusercontent.com/MEHR1DAD/ClashVPN/main/node/fi.yml
+    interval: 180
+    path: trials_providers/FL.yaml
+    health-check:
+      enable: true
+      url: https://i.ytimg.com/generate_204
+      interval: 30
+  CA:
+    type: http
+    url: https://raw.githubusercontent.com/MEHR1DAD/ClashVPN/main/node/ca.yml
+    interval: 180
+    path: trials_providers/CA.yaml
+    health-check:
+      enable: true
+      url: https://i.ytimg.com/generate_204
+      interval: 30
+  US:
+    type: http
+    url: https://raw.githubusercontent.com/MEHR1DAD/ClashVPN/main/node/us.yml
+    interval: 180
+    path: trials_providers/US.yaml
+    health-check:
+      enable: true
+      url: https://i.ytimg.com/generate_204
+      interval: 30
+  DE:
+    type: http
+    url: https://raw.githubusercontent.com/MEHR1DAD/ClashVPN/main/node/de.yml
+    interval: 180
+    path: trials_providers/DE.yaml
+    health-check:
+      enable: true
+      url: https://i.ytimg.com/generate_204
+      interval: 30
+  Relay:
+    type: http
+    url: https://raw.githubusercontent.com/MEHR1DAD/ClashVPN/main/node/relay.yml
+    interval: 180
+    path: trials_providers/Relay.yaml
+    health-check:
+      enable: true
+      url: https://i.ytimg.com/generate_204
+      interval: 30
+
+rule-providers:
+  ir: {type: http, format: yaml, behavior: domain, path: ./ruleset/ir.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ir.yaml, interval: 86400}
+  ads: {type: http, format: yaml, behavior: domain, path: ./ruleset/ads.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ads.yaml, interval: 86400}
+  ircidr: {type: http, format: yaml, behavior: ipcidr, path: ./ruleset/ircidr.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ircidr.yaml, interval: 86400}
+  private: {type: http, format: yaml, behavior: ipcidr, path: ./ruleset/private.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/private.yaml, interval: 86400}
+  apps: {type: http, format: yaml, behavior: classical, path: ./ruleset/apps.yaml, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/apps.yaml, interval: 86400}
+
+rules:
+- DOMAIN-SUFFIX,acl4.ssr,DIRECT
+- DOMAIN-SUFFIX,ip6-localhost,DIRECT
+- DOMAIN-SUFFIX,ip6-loopback,DIRECT
+- DOMAIN-SUFFIX,lan,DIRECT
+- DOMAIN-SUFFIX,local,DIRECT
+- DOMAIN-SUFFIX,localhost,DIRECT
+- IP-CIDR,0.0.0.0/8,DIRECT,no-resolve
+- IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+- IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+- IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+- IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+- IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+- IP-CIDR,198.18.0.0/16,DIRECT,no-resolve
+- IP-CIDR,224.0.0.0/4,DIRECT,no-resolve
+- IP-CIDR6,::1/128,DIRECT,no-resolve
+- IP-CIDR6,fc00::/7,DIRECT,no-resolve
+- IP-CIDR6,fe80::/10,DIRECT,no-resolve
+- DOMAIN,instant.arubanetworks.com,DIRECT
+- DOMAIN,setmeup.arubanetworks.com,DIRECT
+- DOMAIN,router.asus.com,DIRECT
+- DOMAIN,www.asusrouter.com,DIRECT
+- DOMAIN,yacd.metacubex.one,DIRECT ## Yet Another Clash Dashbord for Clash.Meta
+- DOMAIN,clash.metacubex.one,DIRECT ## Razord
+- DOMAIN,clash.razord.top,DIRECT
+- DOMAIN,yacd.haishan.me,DIRECT
+- DOMAIN-SUFFIX,hiwifi.com,DIRECT
+- DOMAIN-SUFFIX,leike.cc,DIRECT
+- DOMAIN-SUFFIX,miwifi.com,DIRECT
+- DOMAIN-SUFFIX,my.router,DIRECT
+- DOMAIN-SUFFIX,p.to,DIRECT
+- DOMAIN-SUFFIX,peiluyou.com,DIRECT
+- DOMAIN-SUFFIX,phicomm.me,DIRECT
+- DOMAIN-SUFFIX,router.ctc,DIRECT
+- DOMAIN-SUFFIX,routerlogin.com,DIRECT
+- DOMAIN-SUFFIX,tendawifi.com,DIRECT
+- DOMAIN-SUFFIX,zte.home,DIRECT
+- DOMAIN-SUFFIX,tplogin.cn,DIRECT
+- DOMAIN-SUFFIX,wifi.cmcc,DIRECT
+- DOMAIN-SUFFIX,ir,DIRECT
+- DOMAIN-KEYWORD,snapp,DIRECT
+- RULE-SET,ads,REJECT
+- RULE-SET,apps,DIRECT
+- RULE-SET,private,DIRECT
+- RULE-SET,ir,DIRECT
+- RULE-SET,ircidr,DIRECT
+- GEOIP,IR,🛩️ direct
+- MATCH,🌐 Slip
