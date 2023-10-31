@@ -1,0 +1,27 @@
+proxies:
+
+- name: "WARP"
+  type: wireguard
+  server: engage.cloudflareclient.com        # 162.159.193.5
+  port: 2408
+  ip: "172.16.0.2/32"
+  ipv6: "2606::1/128"        # 自行替换
+  private-key: "2ApZbmHutuUOW8JbUj4VccdyjySFBqqcpWumaMMAXY=" # 自行替换
+  public-key: "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo="   # 自行替换
+  udp: true
+  #reserved: "abba"           # 自行替换
+  mtu: 1280           # 1420
+  dialer-proxy: "dns"
+  remote-dns-resolve: true
+  dns: ["https://mozilla.cloudflare-dns.com/dns-query"]
+  reserved: [133,97,9]
+  keepalive: 45
+  peers:
+     - server: 162.159.192.1
+       port: 2480
+       ip: 172.16.0.2
+       ipv6: fd01:5ca1:ab1e:80fa:ab85:6eea:213f:f4a5
+       public-key: "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo="
+   #    # pre-shared-key: 31aIhAPwktDGpH4JDhA8GNvjFXEf/a6+UaQRyOAiyfM=
+       allowed_ips: ['0.0.0.0/0']
+       reserved: [209,98,59]
