@@ -72,7 +72,7 @@ dns:
     use-hosts: true
     nameserver: ["https://1.1.1.1/dns-query", "https://adblock.dns.mullvad.net/dns-query"]
     nameserver-policy: {"RULE-SET:ir,ircidr,private,apps": ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"], geoip:ir: ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"], "+.ir","+.bonyan.co": ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"], "RULE-SET:ads,malware,phishing,cryptominers,malware-ip,phishing-ip": ["rcode://success"]}
-    proxy-server-nameserver: ["https://mozilla.cloudflare-dns.com/dns-query", "https://dns.secarchlab.net/dns-query"]
+    proxy-server-nameserver: ["https://mozilla.cloudflare-dns.com/dns-query", "https://cf.cloudflare-gateway.com/dns-query"]
     
 proxy-providers:
   Trojan-SG:
