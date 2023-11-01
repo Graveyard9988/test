@@ -58,8 +58,7 @@ tun:
   inet6-route-address:
     - '::/1'
     - '8000::/1'
-  exclude-package:
-    - chat.delta
+
 
 
 dns:
