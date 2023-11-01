@@ -1,0 +1,164 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: Rule
+log-level: info
+ipv6: true
+external-controller: 127.0.0.1:9090
+experimental:
+  ignore-resolve-fail: true
+  sniff-tls-sni: true
+hosts:
+  "localhost": 127.0.0.1
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+  tracing: true
+
+sniffer:
+  enable: true
+  #override-destination: true
+  sniff:
+    http: { ports: [1-442, 444-8442, 8444-65535], override-destination: true }
+    tls: { ports: [1-79, 81-8079, 8081-65535], override-destination: true }
+    quic: { ports: [443, 8443], override-destination: true }
+  force-domain:
+      - "+.v2ex.com"
+      - www.google.com
+      - google.com
+  skip-domain:
+      - Mijia Cloud
+      - dlg.io.mi.com
+
+  sniffing:
+    - tls
+    - http
+
+  port-whitelist:
+    - "80"
+    - "443"
+    # - 8000-9999
+    
+tun: 
+  enable: true
+  prefer-h3: true 
+  listen: 0.0.0.0:53 
+  stack: gvisor 
+  dns-hijack:
+     - "any:53"
+     - "tcp://any:53"
+  auto-redir: true
+  auto-route: true
+  auto-detect-interface: true
+  strict-route: false
+  inet4-route-address:
+    - 0.0.0.0/1
+    - 128.0.0.0/1
+  inet6-route-address:
+    - '::/1'
+    - '8000::/1'
+
+
+
+dns:
+    enable: true
+    ipv6: true
+    default-nameserver: ['1.1.1.1', '1.0.0.1']
+    enhanced-mode: fake-ip
+    fake-ip-range: '198.18.0.1/16'
+    fake-ip-filter: ["stun.*.*", "stun.*.*.*", "+.stun.*.*", "+.stun.*.*.*", "+.stun.*.*.*.*", "+.stun.*.*.*.*.*", "*.lan", "+.msftncsi.com", "msftconnecttest.com", "time?.*.com", "time.*.com", "time.*.gov", "time.*.apple.com", "time-ios.apple.com", "time1.*.com", "time2.*.com", "time3.*.com", "time4.*.com", "time5.*.com", "time6.*.com", "time7.*.com", "ntp?.*.com", "ntp.*.com", "ntp1.*.com", "ntp2.*.com", "ntp3.*.com", "ntp4.*.com", "ntp5.*.com", "ntp6.*.com", "ntp7.*.com", "+.pool.ntp.org", "+.ipv6.microsoft.com", "speedtest.cros.wr.pvp.net", "network-test.debian.org", "detectportal.firefox.com", "cable.auth.com", "miwifi.com", "routerlogin.com", "routerlogin.net", "tendawifi.com", "tendawifi.net", "tplinklogin.net", "tplinkwifi.net", "*.xiami.com", "tplinkrepeater.net", "router.asus.com", "*.*.*.srv.nintendo.net", "*.*.stun.playstation.net", "*.openwrt.pool.ntp.org", "resolver1.opendns.com", "GC._msDCS.*.*", "DC._msDCS.*.*", "PDC._msDCS.*.*"]
+    use-hosts: true
+    nameserver: ["https://1.1.1.1/dns-query", "https://adblock.dns.mullvad.net/dns-query"]
+    nameserver-policy: {"RULE-SET:ir,ircidr,private,apps": ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"], geoip:ir: ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"], "+.ir","+.bonyan.co": ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"], "RULE-SET:ads,malware,phishing,cryptominers": ["rcode://success"]}
+    remote-nameserver: ["https://dns8.org/dns-query"]
+    proxy-server-nameserver: ["https://dns.ipv6dns.com/dns-query", "https://dns.secarchlab.net/dns-query"]
+    
+proxy-providers:
+  Trojan-SG:
+    type: http
+    url: "https://raw.githubusercontent.com/vveg26/chromego_merge/main/sub/merged_proxies_new.yaml"
+    interval: 3600
+    path: ./trojan_sg.yaml
+    health-check:
+      enable: true
+      interval: 86400
+      url: 'http://www.gstatic.com/generate_204'
+
+  Trojan-SG2:
+    type: http
+    url: "https://api.sublink.dev/sub?target=clash&url=https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/splitted/mixed&emoji=false&list=true&fdn=true"
+    interval: 3600
+    path: ./trojan_sg2.yaml
+    health-check:
+      enable: true
+      interval: 86400
+      url: 'https://detectportal.firefox.com/success.txt'
+
+  Trojan-SG3:
+    type: http
+    url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge_base64.txt"
+    interval: 3600
+    path: ./trojan_sg3.yaml
+    health-check:
+      enable: true
+      interval: 86400
+      url: 'https://detectportal.firefox.com/success.txt'
+
+proxy-groups:
+
+  - { name: "global", type: select, proxies: ["♻️Auto","manual"]}
+  - { name: "♻️Auto", type: url-test, url: https://detectportal.firefox.com/success.txt, interval: 300, tolerance: 800, use: ["Trojan-SG","Trojan-SG2","Trojan-SG3"]}
+  - { name: "manual", type: select, use: ["Trojan-SG","Trojan-SG2","Trojan-SG3"]}
+  
+
+      
+rule-providers:
+  ir: {type: http, format: text, behavior: domain, path: ./ruleset/ir.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ir.txt, interval: 86400}
+  ads: {type: http, format: text, behavior: domain, path: ./ruleset/ads.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ads.txt, interval: 86400}
+  ircidr: {type: http, format: text, behavior: ipcidr, path: ./ruleset/ircidr.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ircidr.txt, interval: 86400}
+  private: {type: http, format: text, behavior: ipcidr, path: ./ruleset/private.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/private.txt, interval: 86400}
+  apps: {type: http, format: text, behavior: domain, path: ./ruleset/apps.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/apps.txt, interval: 86400}
+  malware-ip: {type: http, format: text, behavior: ipcidr, path: ./ruleset/malware-ip.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/malware-ip.txt, interval: 86400}
+  phishing-ip: {type: http, format: text, behavior: ipcidr, path: ./ruleset/phishing-ip.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/phishing-ip.txt, interval: 86400}
+  malware: {type: http, format: text, behavior: domain, path: ./ruleset/malware.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/malware.txt, interval: 86400}
+  phishing: {type: http, format: text, behavior: domain, path: ./ruleset/phishing.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/phishing.txt, interval: 86400}
+  cryptominers: {type: http, format: text, behavior: domain, path: ./ruleset/cryptominers.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/cryptominers.txt, interval: 86400}
+  YouTube: {type: http, behavior: classical, path: ./ruleset/YouTube.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml, interval: 86400}
+  YouTubeMusic: {type: http, behavior: classical, path: ./ruleset/YouTubeMusic.yaml, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTubeMusic/YouTubeMusic.yaml, interval: 86400}
+
+
+rules:
+  - DOMAIN-SUFFIX,local,DIRECT
+  - DOMAIN-SUFFIX,ip6-localhost,DIRECT
+  - DOMAIN-SUFFIX,ip6-loopback,DIRECT
+  - DOMAIN-SUFFIX,lan,DIRECT
+  - DOMAIN-SUFFIX,localhost,DIRECT
+  - DOMAIN-SUFFIX,ir,DIRECT
+  - DOMAIN,clash.razord.top,DIRECT
+  - DOMAIN,yacd.haishan.me,DIRECT
+  - DOMAIN-KEYWORD,snapp,DIRECT
+  - DOMAIN,yacd.metacubex.one,DIRECT ## Yet Another Clash Dashbord for Clash.Meta
+  - DOMAIN,clash.metacubex.one,DIRECT ## Razord
+  - RULE-SET,YouTube,global
+  - RULE-SET,YouTubeMusic,global
+  - RULE-SET,ads,REJECT
+  - RULE-SET,malware,REJECT
+  - RULE-SET,phishing,REJECT
+  - RULE-SET,cryptominers,REJECT
+  - RULE-SET,malware-ip,REJECT
+  - RULE-SET,phishing-ip,REJECT
+  - RULE-SET,apps,DIRECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,ir,DIRECT
+  - RULE-SET,ircidr,DIRECT
+  - AND,((NETWORK,udp),(DST-PORT,443),(RULE-SET,YouTube)),REJECT
+  - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(RULE-SET,YouTube)))),REJECT
+  - AND,((NETWORK,udp),(RULE-SET,YouTube)),REJECT
+  - AND,((NETWORK,udp),(DST-PORT,443),(RULE-SET,YouTubeMusic)),REJECT
+  - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(RULE-SET,YouTubeMusic)))),REJECT
+  - AND,((NETWORK,udp),(RULE-SET,YouTubeMusic)),REJECT
+  - AND,((NETWORK,udp),(DST-PORT,443),(RULE-SET,Instagram)),REJECT
+  - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(RULE-SET,Instagram)))),REJECT
+  - AND,((NETWORK,udp),(RULE-SET,Instagram)),REJECT
+  - MATCH,♻️Auto
