@@ -120,6 +120,8 @@ rule-providers:
   ircidr: {type: http, format: text, behavior: ipcidr, path: ./ruleset/ircidr.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ircidr.txt, interval: 86400}
   private: {type: http, format: text, behavior: ipcidr, path: ./ruleset/private.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/private.txt, interval: 86400}
   apps: {type: http, format: text, behavior: domain, path: ./ruleset/apps.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/apps.txt, interval: 86400}
+  malware-ip: {type: http, format: text, behavior: ipcidr, path: ./ruleset/malware-ip.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/malware-ip.txt, interval: 86400}
+  phishing-ip: {type: http, format: text, behavior: ipcidr, path: ./ruleset/phishing-ip.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/phishing-ip.txt, interval: 86400}
   malware: {type: http, format: text, behavior: domain, path: ./ruleset/malware.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/malware.txt, interval: 86400}
   phishing: {type: http, format: text, behavior: domain, path: ./ruleset/phishing.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/phishing.txt, interval: 86400}
   cryptominers: {type: http, format: text, behavior: domain, path: ./ruleset/cryptominers.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/cryptominers.txt, interval: 86400}
@@ -145,6 +147,8 @@ rules:
   - RULE-SET,malware,REJECT
   - RULE-SET,phishing,REJECT
   - RULE-SET,cryptominers,REJECT
+  - RULE-SET,malware-ip,REJECT
+  - RULE-SET,phishing-ip,REJECT
   - RULE-SET,apps,DIRECT
   - RULE-SET,private,DIRECT
   - RULE-SET,ir,DIRECT
@@ -155,4 +159,7 @@ rules:
   - AND,((NETWORK,udp),(DST-PORT,443),(RULE-SET,YouTubeMusic)),REJECT
   - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(RULE-SET,YouTubeMusic)))),REJECT
   - AND,((NETWORK,udp),(RULE-SET,YouTubeMusic)),REJECT
+  - AND,((NETWORK,udp),(DST-PORT,443),(RULE-SET,Instagram)),REJECT
+  - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(RULE-SET,Instagram)))),REJECT
+  - AND,((NETWORK,udp),(RULE-SET,Instagram)),REJECT
   - MATCH,♻️Auto
