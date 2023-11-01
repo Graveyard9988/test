@@ -96,12 +96,21 @@ proxy-providers:
       interval: 86400
       url: 'http://www.gstatic.com/generate_204'
 
+  Trojan-SG3:
+    type: http
+    url: "https://raw.githubusercontent.com/LittleRey/clashx-meta/main/CF-Warp.yaml"
+    interval: 3600
+    path: ./trojan_sg3.yaml
+    health-check:
+      enable: true
+      interval: 86400
+      url: 'http://www.gstatic.com/generate_204'
 
 proxy-groups:
 
   - { name: "global", type: select, proxies: ["♻️Auto","manual"]}
-  - { name: "♻️Auto", type: url-test, url: http://www.gstatic.com/generate_204, interval: 300, tolerance: 800, use: ["Trojan-SG","Trojan-SG2"]}
-  - { name: "manual", type: select, use: ["Trojan-SG","Trojan-SG2"]}
+  - { name: "♻️Auto", type: url-test, url: http://www.gstatic.com/generate_204, interval: 300, tolerance: 800, use: ["Trojan-SG","Trojan-SG2","Trojan-SG3"]}
+  - { name: "manual", type: select, use: ["Trojan-SG","Trojan-SG2","Trojan-SG3"]}
   
 
       
@@ -140,8 +149,4 @@ rules:
   - RULE-SET,private,DIRECT
   - RULE-SET,ir,DIRECT
   - RULE-SET,ircidr,DIRECT
-  - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(RULE-SET,YouTube)))),REJECT
-  - AND,((NETWORK,udp),(RULE-SET,YouTube)),REJECT
-  - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(RULE-SET,YouTubeMusic)))),REJECT
-  - AND,((NETWORK,udp),(RULE-SET,YouTubeMusic)),REJECT
   - MATCH,♻️Auto
