@@ -127,7 +127,7 @@
       "type": "wireguard",
       "server": "engage.cloudflareclient.com ",
       "server_port": 2408,
-      "private_key": "qDtSf7Xsccygxcg/3cr74j5n4ISabX9WU0kQKGrG/lA=",
+      "private_key": "xxx",
       "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
       "local_address": [
         "172.16.0.2/32"
