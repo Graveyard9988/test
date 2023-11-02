@@ -154,5 +154,5 @@ rules:
   - AND,((NETWORK,udp),(DST-PORT,443),(RULE-SET,Instagram)),REJECT
   - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(RULE-SET,Instagram)))),REJECT
   - AND,((NETWORK,udp),(RULE-SET,Instagram)),REJECT
-  - OR,((RULE-SET,ir),(RULE-SET,ircidr),(RULE-SET,apps)),DIRECT
+  - OR,((RULE-SET,ir),(RULE-SET,ircidr),(RULE-SET,apps),(RULE-SET,private)),DIRECT
   - MATCH,♻️Auto
