@@ -143,16 +143,8 @@ rules:
   - RULE-SET,YouTube,global
   - RULE-SET,YouTubeMusic,global
   - RULE-SET,Instagram,global
-  - RULE-SET,ads,REJECT
-  - RULE-SET,malware,REJECT
-  - RULE-SET,phishing,REJECT
-  - RULE-SET,cryptominers,REJECT
-  - RULE-SET,malware-ip,REJECT
-  - RULE-SET,phishing-ip,REJECT
-  - RULE-SET,apps,DIRECT
-  - RULE-SET,private,DIRECT
-  - RULE-SET,ir,DIRECT
-  - RULE-SET,ircidr,DIRECT
+  - OR,((RULE-SET,ads),(RULE-SET,malware),(RULE-SET,phishing),(RULE-SET,cryptominers)),REJECT
+  - OR,((RULE-SET,malware-ip),(RULE-SET,phishing-ip)),REJECT
   - AND,((NETWORK,udp),(DST-PORT,443),(RULE-SET,YouTube)),REJECT
   - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(RULE-SET,YouTube)))),REJECT
   - AND,((NETWORK,udp),(RULE-SET,YouTube)),REJECT
@@ -162,4 +154,5 @@ rules:
   - AND,((NETWORK,udp),(DST-PORT,443),(RULE-SET,Instagram)),REJECT
   - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(RULE-SET,Instagram)))),REJECT
   - AND,((NETWORK,udp),(RULE-SET,Instagram)),REJECT
+  - OR,((RULE-SET,ir),(RULE-SET,ircidr),(RULE-SET,apps)),DIRECT
   - MATCH,♻️Auto
