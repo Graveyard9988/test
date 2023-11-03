@@ -16,6 +16,9 @@ profile:
   store-fake-ip: true
   tracing: true
 
+geox-url: {mmdb: "https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/geoip.metadb", geoip: "https://github.com/chocolate4u/Iran-v2ray-rules/releases/latest/download/geoip.dat", geosite: "https://github.com/chocolate4u/Iran-v2ray-rules/releases/latest/download/geosite.dat"}
+#geox-url: {mmdb: "https://cdn.jsdelivr.net/gh/Lemonawa/maxmind-geoip@release/Country.mmdb", geoip: "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat", geosite: "https://github.com/chocolate4u/Iran-v2ray-rules/releases/latest/download/geosite.dat"}
+
 sniffer:
   enable: true
   #override-destination: true
