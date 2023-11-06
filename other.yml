@@ -104,12 +104,22 @@ proxy-providers:
       enable: true
       interval: 86400
       url: 'https://detectportal.firefox.com/success.txt'
+      
+  Trojan-SG4:
+    type: http
+    url: "https://anaer.github.io/Sub/clash.yaml"
+    interval: 3600
+    path: ./trojan_sg4.yaml
+    health-check:
+      enable: true
+      interval: 86400
+      url: 'https://detectportal.firefox.com/success.txt'
 
 proxy-groups:
 
   - { name: "global", type: select, proxies: ["♻️Auto","manual"]}
-  - { name: "♻️Auto", type: url-test, url: https://detectportal.firefox.com/success.txt, interval: 300, tolerance: 800, use: ["Trojan-SG","Trojan-SG2","Trojan-SG3"]}
-  - { name: "manual", type: select, use: ["Trojan-SG","Trojan-SG2","Trojan-SG3"]}
+  - { name: "♻️Auto", type: url-test, url: https://detectportal.firefox.com/success.txt, interval: 300, tolerance: 800, use: ["Trojan-SG","Trojan-SG2","Trojan-SG3","Trojan-SG4"]}
+  - { name: "manual", type: select, use: ["Trojan-SG","Trojan-SG2","Trojan-SG3","Trojan-SG4"]}
   
 
       
