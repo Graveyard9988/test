@@ -145,11 +145,8 @@ rules:
   - DOMAIN-SUFFIX,lan,DIRECT
   - DOMAIN-SUFFIX,localhost,DIRECT
   - DOMAIN-SUFFIX,ir,DIRECT
-  - DOMAIN,clash.razord.top,DIRECT
-  - DOMAIN,yacd.haishan.me,DIRECT
   - DOMAIN-KEYWORD,snapp,DIRECT
-  - DOMAIN,yacd.metacubex.one,DIRECT ## Yet Another Clash Dashbord for Clash.Meta
-  - DOMAIN,clash.metacubex.one,DIRECT ## Razord
+  - OR,((DOMAIN,d.metacubex.one),(DOMAIN,yacd.haishan.me),(DOMAIN,clash.metacubex.one),(DOMAIN,clash.razord.top)),DIRECT
   - OR,((RULE-SET,YouTube),(RULE-SET,YouTubeMusic),(RULE-SET,Instagram)),global
   - OR,((RULE-SET,ads),(RULE-SET,malware),(RULE-SET,phishing),(RULE-SET,cryptominers)),REJECT
   - OR,((RULE-SET,malware-ip),(RULE-SET,phishing-ip)),REJECT
