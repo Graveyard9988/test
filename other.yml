@@ -150,9 +150,7 @@ rules:
   - DOMAIN-KEYWORD,snapp,DIRECT
   - DOMAIN,yacd.metacubex.one,DIRECT ## Yet Another Clash Dashbord for Clash.Meta
   - DOMAIN,clash.metacubex.one,DIRECT ## Razord
-  - RULE-SET,YouTube,global
-  - RULE-SET,YouTubeMusic,global
-  - RULE-SET,Instagram,global
+  - OR,((RULE-SET,YouTube),(RULE-SET,YouTubeMusic),(RULE-SET,Instagram)),global
   - OR,((RULE-SET,ads),(RULE-SET,malware),(RULE-SET,phishing),(RULE-SET,cryptominers)),REJECT
   - OR,((RULE-SET,malware-ip),(RULE-SET,phishing-ip)),REJECT
   - AND,((NETWORK,udp),(DST-PORT,443),(RULE-SET,YouTube)),REJECT
