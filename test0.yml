@@ -70,29 +70,10 @@ dns:
   fake-ip-range: '198.18.0.1/16'
   fake-ip-filter: ["stun.*.*", "stun.*.*.*", "+.stun.*.*", "+.stun.*.*.*", "+.stun.*.*.*.*", "+.stun.*.*.*.*.*", "*.lan", "+.msftncsi.com", "msftconnecttest.com", "time?.*.com", "time.*.com", "time.*.gov", "time.*.apple.com", "time-ios.apple.com", "time1.*.com", "time2.*.com", "time3.*.com", "time4.*.com", "time5.*.com", "time6.*.com", "time7.*.com", "ntp?.*.com", "ntp.*.com", "ntp1.*.com", "ntp2.*.com", "ntp3.*.com", "ntp4.*.com", "ntp5.*.com", "ntp6.*.com", "ntp7.*.com", "+.pool.ntp.org", "+.ipv6.microsoft.com", "speedtest.cros.wr.pvp.net", "network-test.debian.org", "detectportal.firefox.com", "cable.auth.com", "miwifi.com", "routerlogin.com", "routerlogin.net", "tendawifi.com", "tendawifi.net", "tplinklogin.net", "tplinkwifi.net", "*.xiami.com", "tplinkrepeater.net", "router.asus.com", "*.*.*.srv.nintendo.net", "*.*.stun.playstation.net", "*.openwrt.pool.ntp.org", "resolver1.opendns.com", "GC._msDCS.*.*", "DC._msDCS.*.*", "PDC._msDCS.*.*", WORKGROUP]
 proxy-providers:
-  Trojan-SG:
-    type: http
-    url: "https://raw.githubusercontent.com/vveg26/chromego_merge/main/sub/merged_proxies_new.yaml"
-    interval: 3600
-    path: ./trojan_sg.yaml
-    health-check:
-      enable: true
-      interval: 86400
-      url: 'http://www.gstatic.com/generate_204'
-
-  Trojan-SG2:
-    type: http
-    url: "https://raw.githubusercontent.com/ali322/OSCN/master/screenshot/sing_box_proxies.yaml"
-    interval: 3600
-    path: ./trojan_sg2.yaml
-    health-check:
-      enable: true
-      interval: 86400
-      url: 'http://www.gstatic.com/generate_204'
 
   Trojan-SG3:
     type: http
-    url: "https://raw.githubusercontent.com/moodHappy/HelloWorld/master/ClashMate.yaml"
+    url: "https://raw.githubusercontent.com/imyaoxp/x.sub/main/trials_providers/p_All_Other.yaml"
     interval: 3600
     path: ./trojan_sg3.yaml
     health-check:
@@ -102,7 +83,7 @@ proxy-providers:
 
   Trojan-SG4:
     type: http
-    url: "https://raw.githubusercontent.com/MrMohebi/xray-proxy-grabber-telegram/master/collected-proxies/clash-meta/all.yaml"
+    url: "https://raw.githubusercontent.com/mfbpn/tg_mfbpn_sub/main/trials_providers/US.yaml"
     interval: 3600
     path: ./trojan_sg4.yaml
     health-check:
@@ -129,8 +110,6 @@ proxy-groups:
   - name: دستی 🤏🏻
     type: select
     proxies:
-      - Trojan-SG
-      - Trojan-SG2
       - Trojan-SG3
       - Trojan-SG4
   - name: خودکار (بهترین پینگ) 🤖
@@ -139,8 +118,6 @@ proxy-groups:
     interval: 600
     tolerance: 180
     proxies:
-      - Trojan-SG
-      - Trojan-SG2
       - Trojan-SG3
       - Trojan-SG4
   - name: پشتیبان (بهترین پینگ) ➡️
@@ -149,8 +126,6 @@ proxy-groups:
     interval: 600
     tolerance: 180
     proxies:
-      - Trojan-SG
-      - Trojan-SG2
       - Trojan-SG3
       - Trojan-SG4
   - name: توزیع بار (هش سازگار) ♻️
@@ -160,8 +135,6 @@ proxy-groups:
     interval: 600
     tolerance: 180
     proxies:
-      - Trojan-SG
-      - Trojan-SG2
       - Trojan-SG3
       - Trojan-SG4
   - name: توزیع بار (یکنواخت) ⏳
@@ -171,8 +144,6 @@ proxy-groups:
     interval: 600
     tolerance: 180
     proxies:
-      - Trojan-SG
-      - Trojan-SG2
       - Trojan-SG3
       - Trojan-SG4
   - name: 🇮🇷 سایتای ایرانی
