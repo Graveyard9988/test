@@ -109,7 +109,7 @@ proxy-groups:
       - 🔐 فقط سایتای فیلتر شده
   - name: دستی 🤏🏻
     type: select
-    proxies:
+    use:
       - "Trojan-SG3"
       - "Trojan-SG4"
   - name: خودکار (بهترین پینگ) 🤖
@@ -117,7 +117,7 @@ proxy-groups:
     url: https://api.v2fly.org/checkConnection.svgz
     interval: 600
     tolerance: 180
-    proxies:
+    use:
       - "Trojan-SG3"
       - "Trojan-SG4"
   - name: پشتیبان (بهترین پینگ) ➡️
@@ -125,7 +125,7 @@ proxy-groups:
     url: https://api.v2fly.org/checkConnection.svgz
     interval: 600
     tolerance: 180
-    proxies:
+    use:
       - "Trojan-SG3"
       - "Trojan-SG4"
   - name: توزیع بار (هش سازگار) ♻️
@@ -134,18 +134,19 @@ proxy-groups:
     url: https://api.v2fly.org/checkConnection.svgz
     interval: 600
     tolerance: 180
-    proxies:
+    use:
       - "Trojan-SG3"
       - "Trojan-SG4"
   - name: توزیع بار (یکنواخت) ⏳
     type: load-balance
     strategy: round-robin
     url: https://api.v2fly.org/checkConnection.svgz
-    interval: 36000
+    interval: 600
     tolerance: 180
-    proxies:
+    use:
       - "Trojan-SG3"
       - "Trojan-SG4"
+
   - name: 🇮🇷 سایتای ایرانی
     type: select
     proxies:
