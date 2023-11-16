@@ -149,7 +149,10 @@ proxy-groups:
     interval: 600
     tolerance: 180
     proxies:
-${configList.map(cnf => "      - " + cnf.name.trim()).join("\n")}
+      - Trojan-SG
+      - Trojan-SG2
+      - Trojan-SG3
+      - Trojan-SG4
   - name: توزیع بار (هش سازگار) ♻️
     type: load-balance
     strategy: consistent-hashing
