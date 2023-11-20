@@ -376,7 +376,7 @@ rule-providers:
   private:
     type: http
     behavior: domain
-    url: https://raw.githubusercontent.com/Kr328/V2rayDomains2Clash/generated/private.yaml
+    url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/private.yaml
     interval: 432000
     path: ./ruleset/private.yaml
   category_ir:
