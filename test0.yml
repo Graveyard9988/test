@@ -265,12 +265,6 @@ rule-providers:
     url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/add.yaml
     interval: 432000
     path: ./ruleset/add.yaml
-  MoreAd:
-    type: http
-    behavior: domain
-    url: https://howdy.id/download/rules/clash.txt
-    interval: 86400
-    path: ./providers/rule-provider_clash.yaml
   AntiAd:
     type: http
     behavior: domain
@@ -456,7 +450,6 @@ rules:
   - RULE-SET,PersianBlocker,🆎 تبلیغات
   - RULE-SET,ads_ip,🆎 تبلیغات,no-resolve
   - RULE-SET,add,🆎 تبلیغات
-  - RULE-SET,MoreAd,🆎 تبلیغات
   - RULE-SET,AntiAd,🆎 تبلیغات
   - RULE-SET,GoodbyeAds,🆎 تبلیغات
   - RULE-SET,blocked,🔀 نوع انتخاب پروکسی
