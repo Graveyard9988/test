@@ -244,7 +244,7 @@ rule-providers:
   category_ads_all:
     type: http
     behavior: domain
-    url: https://raw.githubusercontent.com/Kr328/V2rayDomains2Clash/generated/category-ads-all.yaml
+    url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/category-ads-all.yaml
     interval: 432000
     path: ./ruleset/category_ads_all.yaml
   iran_ads:
