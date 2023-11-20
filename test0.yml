@@ -373,12 +373,6 @@ rule-providers:
     url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/private.yaml
     interval: 432000
     path: ./ruleset/private.yaml
-  category_ir:
-    type: http
-    behavior: domain
-    url: https://raw.githubusercontent.com/Kr328/V2rayDomains2Clash/generated/category-ir.yaml
-    interval: 432000
-    path: ./ruleset/category_ir.yaml
   iran:
     type: http
     behavior: classical
@@ -483,7 +477,6 @@ rules:
   - RULE-SET,private,🛡️ بدون فیلترشکن
   - RULE-SET,ircidr,🇮🇷 سایتای ایرانی
   - GEOIP,IR,🇮🇷 سایتای ایرانی
-  - RULE-SET,category_ir,🇮🇷 سایتای ایرانی
   - RULE-SET,iran,🇮🇷 سایتای ایرانی
   - RULE-SET,iran_other,🇮🇷 سایتای ایرانی
   - RULE-SET,ir,🇮🇷 سایتای ایرانی
