@@ -235,12 +235,6 @@ rule-providers:
     url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/Purification%20app.yaml
     interval: 432000
     path: ./ruleset/Purification.yaml
-  category_public_tracker:
-    type: http
-    behavior: domain
-    url: https://raw.githubusercontent.com/Kr328/V2rayDomains2Clash/generated/category-public-tracker.yaml
-    interval: 432000
-    path: ./ruleset/category_public_tracker.yaml
   Global:
     type: http
     behavior: classical
@@ -469,7 +463,6 @@ rule-providers:
 rules:
   - RULE-SET,Purification_ip,🍃 تصفیه برنامه,no-resolve
   - RULE-SET,Purification,🍃 تصفیه برنامه
-  - RULE-SET,category_public_tracker,🛑 رهگیری جهانی
   - RULE-SET,Global,🛑 رهگیری جهانی
   - RULE-SET,malware,⚠️ سایتای مخرب
   - RULE-SET,phishing,⚠️ سایتای مخرب
