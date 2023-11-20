@@ -289,12 +289,6 @@ rule-providers:
     url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/blocked-sites.yml
     interval: 432000
     path: ./ruleset/blocked.yaml
-  category_porn:
-    type: http
-    behavior: domain
-    url: https://raw.githubusercontent.com/Kr328/V2rayDomains2Clash/generated/category-porn.yaml
-    interval: 432000
-    path: ./ruleset/category_porn.yaml
   facebook:
     type: http
     behavior: domain
@@ -476,7 +470,6 @@ rules:
   - RULE-SET,apps,🇮🇷 سایتای ایرانی
   - RULE-SET,steam,🎮 استیم
   - RULE-SET,tahrim,🏴‍☠️ سایتای تحریمی
-  - RULE-SET,category_porn,🔀 نوع انتخاب پروکسی
   - RULE-SET,facebook,🔀 نوع انتخاب پروکسی
   - RULE-SET,youtube,🔀 نوع انتخاب پروکسی
   - RULE-SET,instagram,🔀 نوع انتخاب پروکسی
