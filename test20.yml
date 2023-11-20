@@ -83,7 +83,7 @@ proxy-providers:
 
   Trojan-SG4:
     type: http
-    url: "https://raw.githubusercontent.com/vveg26/chromego_merge/main/sub/merged_warp_proxies_new.yaml"
+    url: "https://yebekhe.link/api/toClash/?url=https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/base64/mix&type=clash&process=full"
     interval: 3600
     path: ./trojan_sg40.yaml
     health-check:
