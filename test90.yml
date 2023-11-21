@@ -102,7 +102,7 @@ proxy-providers:
 
   Trojan-SG4:
     type: http
-    url: "https://raw.githubusercontent.com/MrMohebi/xray-proxy-grabber-telegram/master/collected-proxies/clash-meta/all.yaml"
+    url: "https://raw.githubusercontent.com/MrMohebi/xray-proxy-grabber-telegram/master/collected-proxies/clash-meta/actives_under_1500ms.yaml"
     interval: 3600
     path: ./trojan_sg4.yaml
     health-check:
