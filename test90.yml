@@ -64,7 +64,7 @@ dns:
   enhanced-mode: fake-ip
   listen: 0.0.0.0:7874
   use-host: true
-  nameserver: ["https://1.1.1.1/dns-query", "https://adblock.dns.mullvad.net/dns-query"]
+  nameserver: ["https://1.1.1.1/dns-query", "https://base.dns.mullvad.net/dns-query"]
   nameserver-policy: {"RULE-SET:ir,ircidr,iran,apps,iran-other": ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"], geoip:ir: ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"], "+.ir","+.bonyan.co": ['217.218.155.155', '217.218.127.127', "https://dns.403.online/dns-query", "https://dns.shecan.ir/dns-query"], RULE-SET:category-ads-all,ads,ads2,iran_ads,PersianBlocker,ads_ip,AnitiAd,malware,phishing,cryptominers,malware-ip,phishing-ip: ["rcode://success"]}
   proxy-server-nameserver: ["https://dns.ipv6dns.com/dns-query", "https://dns.secarchlab.net/dns-query"]
   fake-ip-range: '198.18.0.1/16'
@@ -74,7 +74,7 @@ proxy-providers:
     type: http
     url: "https://raw.githubusercontent.com/vveg26/chromego_merge/main/sub/merged_proxies_new.yaml"
     interval: 3600
-    path: ./trojan_sg.yaml
+    path: ./subscription//trojan_sg.yaml
     health-check:
       enable: true
       interval: 86400
@@ -84,7 +84,7 @@ proxy-providers:
     type: http
     url: "https://raw.githubusercontent.com/ali322/OSCN/master/screenshot/sing_box_proxies.yaml"
     interval: 3600
-    path: ./trojan_sg2.yaml
+    path: ./subscription//trojan_sg2.yaml
     health-check:
       enable: true
       interval: 86400
@@ -94,7 +94,7 @@ proxy-providers:
     type: http
     url: "https://raw.githubusercontent.com/moodHappy/HelloWorld/master/ClashMate.yaml"
     interval: 3600
-    path: ./trojan_sg3.yaml
+    path: ./subscription//trojan_sg3.yaml
     health-check:
       enable: true
       interval: 86400
@@ -104,7 +104,16 @@ proxy-providers:
     type: http
     url: "https://raw.githubusercontent.com/MrMohebi/xray-proxy-grabber-telegram/master/collected-proxies/clash-meta/actives_under_1500ms.yaml"
     interval: 3600
-    path: ./trojan_sg4.yaml
+    path: ./subscription//trojan_sg4.yaml
+    health-check:
+      enable: true
+      interval: 86400
+      url: 'http://www.gstatic.com/generate_204'
+  Wire:
+    type: http
+    url: "https://raw.githubusercontent.com/tony-sung/clash-meta-configuration/main/subscription/mine.yaml"
+    interval: 3600
+    path: ./subscription//wire.yaml
     health-check:
       enable: true
       interval: 86400
@@ -133,6 +142,7 @@ proxy-groups:
       - "Trojan-SG2"
       - "Trojan-SG3"
       - "Trojan-SG4"
+      - "Wire" 
   - name: خودکار (بهترین پینگ) 🤖
     type: url-test
     url: https://api.v2fly.org/checkConnection.svgz
@@ -143,6 +153,7 @@ proxy-groups:
       - "Trojan-SG2"
       - "Trojan-SG3"
       - "Trojan-SG4"
+      - "Wire"    
   - name: پشتیبان (بهترین پینگ) ➡️
     type: fallback
     url: https://api.v2fly.org/checkConnection.svgz
@@ -153,6 +164,7 @@ proxy-groups:
       - "Trojan-SG2"
       - "Trojan-SG3"
       - "Trojan-SG4"
+      - "Wire" 
   - name: توزیع بار (هش سازگار) ♻️
     type: load-balance
     strategy: consistent-hashing
@@ -164,6 +176,7 @@ proxy-groups:
       - "Trojan-SG2"
       - "Trojan-SG3"
       - "Trojan-SG4"
+      - "Wire" 
   - name: توزیع بار (یکنواخت) ⏳
     type: load-balance
     strategy: round-robin
@@ -175,7 +188,7 @@ proxy-groups:
       - "Trojan-SG2"
       - "Trojan-SG3"
       - "Trojan-SG4"
-
+      - "Wire" 
   - name: 🇮🇷 سایت های ایرانی
     type: select
     proxies:
@@ -366,6 +379,12 @@ rule-providers:
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitch/Twitch.yaml
     interval: 432000
     path: ./ruleset/twitch.yaml
+  bing:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Bing/Bing.yaml
+    interval: 432000
+    path: ./ruleset/bing.yaml
   private:
     type: http
     behavior: domain
@@ -504,4 +523,5 @@ rules:
   - RULE-SET,whatsapp,🔀 نوع انتخاب پروکسی
   - RULE-SET,tiktok,🔀 نوع انتخاب پروکسی
   - RULE-SET,twitch,🔀 نوع انتخاب پروکسی
+  - RULE-SET,bing,🔀 نوع انتخاب پروکسی
   - MATCH,📶 انتخاب نوع اتصال
