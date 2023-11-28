@@ -108,20 +108,22 @@ proxy-providers:
     type: http
     url: "https://raw.githubusercontent.com/ali322/OSCN/master/screenshot/sing_box_proxies.yaml"
     path: ./assets/2.yaml
+    interval: 1800
     health-check:
       enable: true
       url: http://clients3.google.com/generate_204
-      interval: 180
+      interval: 900
       
    
   provide4:
     type: http
     url: "https://raw.githubusercontent.com/vveg26/chromego_merge/main/sub/merged_proxies_new.yaml"
     path: ./assets/4.yaml
+    interval: 1800
     health-check:
       enable: true
       url: http://clients3.google.com/generate_204
-      interval: 180
+      interval: 900
             
 
 rule-providers:
