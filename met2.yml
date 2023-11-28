@@ -107,7 +107,7 @@ proxy-providers:
   provide2:
     type: http
     url: "https://raw.githubusercontent.com/tony-sung/clash-meta-configuration/main/subscription/mine.yaml"
-    path: ./assets/2.yaml
+    path: ./assets/20.yaml
     interval: 1800
     health-check:
       enable: true
@@ -118,7 +118,7 @@ proxy-providers:
   provide4:
     type: http
     url: "https://raw.githubusercontent.com/MrMohebi/xray-proxy-grabber-telegram/master/collected-proxies/clash-meta/all.yaml"
-    path: ./assets/4.yaml
+    path: ./assets/40.yaml
     interval: 1800
     health-check:
       enable: true
