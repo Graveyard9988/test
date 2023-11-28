@@ -111,7 +111,7 @@ proxy-providers:
     health-check:
       enable: true
       url: http://clients3.google.com/generate_204
-      interval: 60
+      interval: 180
       
    
   provide4:
@@ -121,7 +121,7 @@ proxy-providers:
     health-check:
       enable: true
       url: http://clients3.google.com/generate_204
-      interval: 60
+      interval: 180
             
 
 rule-providers:
