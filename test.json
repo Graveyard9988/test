@@ -18,19 +18,24 @@
             "https://cloudflare-dns.com/dns-query",
             {
                 "address": "1.1.1.1",
+                "domains": [
+                    "geosite:private",
+                    "geosite:ir",
+                    "domain:.ir"
+                ],
                 "expectIPs": [
-                    "geoip:ir"
+                    "geoip:cn"
                 ],
                 "port": 53
             }
         ]
   },
-"fakedns":[
-  {
-    "ipPool":"198.18.0.0/15",
-"poolSize":10000
-  }
-],
+    "fakedns": [
+        {
+            "ipPool": "198.18.0.0/15",
+            "poolSize": 10000
+        }
+    ],
   "inbounds": [
     {
       "domainOverride": [
