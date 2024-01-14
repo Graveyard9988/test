@@ -52,7 +52,9 @@
       "sniffing": {
         "destOverride": [
           "http",
-          "tls"],
+          "tls",
+          "fakedns"
+        ],
         "enabled": false
       },
       "tag": "socks"
@@ -67,7 +69,8 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "fakedns"
         ]
       },
       "tag": "http"
@@ -90,10 +93,10 @@
   "outbounds": [
     {
       "mux": {
-        "concurrency": -1,
-        "enabled": false,
+        "concurrency": 8,
+        "enabled": true,
         "xudpConcurrency": 8,
-        "xudpProxyUDP443": ""
+        "xudpProxyUDP443": "reject"
       },
       "protocol": "vless",
       "settings": {
@@ -121,6 +124,7 @@
           "allowInsecure": false,
           "alpn": [
             "http/1.1",
+            "h2",
             "h3"
           ],
           "fingerprint": "chrome",
@@ -200,6 +204,20 @@
       "tag": "dns-out"
     }
   ],
+    "policy": {
+        "levels": {
+            "8": {
+                "connIdle": 300,
+                "downlinkOnly": 1,
+                "handshake": 4,
+                "uplinkOnly": 1
+            }
+        },
+        "system": {
+            "statsOutboundUplink": true,
+            "statsOutboundDownlink": true
+        }
+    },
   "routing": {
     "domainStrategy": "IPIfNonMatch",
     "rules": [
