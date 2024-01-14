@@ -19,9 +19,12 @@
             }
         ]
   },
-"fakedns":[{"ipPool":"198.18.0.0/15",
-"poolSize":10000}
-],
+  "fakedns": [
+    {
+      "ipPool": "198.18.0.0/15",
+      "poolSize": 10000
+    }
+  ],
   "inbounds": [
     {
       "port": 10808,
