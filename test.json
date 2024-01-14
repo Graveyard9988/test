@@ -1,23 +1,12 @@
 {
   "dns": {
     "hosts": {
-      "domain:googleapis.cn": "googleapis.com",
-      "domain:youtube.com": "google.com",
-      "cloudflare-dns.com": [
-        "172.67.73.38",
-        "104.19.155.92",
-        "172.67.73.163",
-        "104.18.155.42",
-        "104.16.124.175",
-        "104.16.248.249",
-        "104.16.249.249",
-        "104.26.13.8"        
-      ]
+      "domain:googleapis.cn": "googleapis.com"
     },
     "servers": [
-            "https://cloudflare-dns.com/dns-query",
+            "https://dns.google/dns-query",
             {
-                "address": "1.1.1.1",
+                "address": "8.8.8.8",
                 "domains": [
                     "geosite:private",
                     "geosite:ir",
@@ -30,19 +19,11 @@
             }
         ]
   },
-    "fakedns": [
-        {
-            "ipPool": "198.18.0.0/15",
-            "poolSize": 10000
-        }
-    ],
+"fakedns":[{"ipPool":"198.18.0.0/15",
+"poolSize":10000}
+],
   "inbounds": [
     {
-      "domainOverride": [
-        "http",
-        "tls",
-        "fakedns"
-      ],
       "port": 10808,
       "protocol": "socks",
       "settings": {
@@ -66,14 +47,6 @@
       "settings": {
         "userLevel": 8
       },
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls",
-          "fakedns"
-        ]
-      },
       "tag": "http"
     },
     {
@@ -94,10 +67,10 @@
   "outbounds": [
     {
       "mux": {
-        "concurrency": 8,
-        "enabled": true,
+        "concurrency": -1,
+        "enabled": false,
         "xudpConcurrency": 8,
-        "xudpProxyUDP443": "reject"
+        "xudpProxyUDP443": ""
       },
       "protocol": "vless",
       "settings": {
@@ -125,7 +98,6 @@
           "allowInsecure": false,
           "alpn": [
             "http/1.1",
-            "h2",
             "h3"
           ],
           "fingerprint": "chrome",
@@ -205,20 +177,6 @@
       "tag": "dns-out"
     }
   ],
-    "policy": {
-        "levels": {
-            "8": {
-                "connIdle": 300,
-                "downlinkOnly": 1,
-                "handshake": 4,
-                "uplinkOnly": 1
-            }
-        },
-        "system": {
-            "statsOutboundUplink": true,
-            "statsOutboundDownlink": true
-        }
-    },
   "routing": {
     "domainStrategy": "IPIfNonMatch",
     "rules": [
@@ -231,9 +189,9 @@
       },
       {
         "ip": [
-          "1.1.1.1"
+          "8.8.8.8"
         ],
-        "outboundTag": "direct",
+        "outboundTag": "proxy",
         "port": "53",
         "type": "field"
       },
