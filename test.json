@@ -15,9 +15,9 @@
       ]
     },
     "servers": [
-            "https://8.8.8.8/dns-query",
+            "https://cloudflare-dns.com/dns-query",
             {
-                "address": "8.8.8.8",
+                "address": "1.1.1.1",
                 "expectIPs": [
                     "geoip:ir"
                 ],
@@ -207,7 +207,7 @@
       },
       {
         "ip": [
-          "8.8.8.8"
+          "1.1.1.1"
         ],
         "outboundTag": "direct",
         "port": "53",
