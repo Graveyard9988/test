@@ -40,7 +40,8 @@
     {
       "domainOverride": [
         "http",
-        "tls"
+        "tls",
+        "fakedns"
       ],
       "port": 10808,
       "protocol": "socks",
