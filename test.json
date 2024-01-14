@@ -27,6 +27,11 @@
   ],
   "inbounds": [
     {
+    {
+      "domainOverride": [
+        "http",
+        "tls"
+      ],
       "port": 10808,
       "protocol": "socks",
       "settings": {
