@@ -87,7 +87,7 @@ proxy-providers:
 
   Trojan-SG2:
     type: http
-    url: "https://raw.githubusercontent.com/ali322/OSCN/master/screenshot/sing_box_proxies.yaml"
+    url: "https://neko-warp.nloli.xyz/neko_warp.yaml"
     interval: 3600
     path: ./trojan_sg2.yaml
     health-check:
