@@ -15,8 +15,6 @@ profile:
   store-selected: true
   store-fake-ip: true
   tracing: true
-
-
   enable: true
   #override-destination: true
   sniff:
@@ -97,7 +95,7 @@ proxy-providers:
 
   Trojan-SG3:
     type: http
-    url: "https://raw.githubusercontent.com/moodHappy/HelloWorld/master/ClashMate.yaml"
+    url: "https://raw.githubusercontent.com/taijichadao/taijichadao.github.io/main/json/Warp.txt"
     interval: 3600
     path: ./trojan_sg3.yaml
     health-check:
