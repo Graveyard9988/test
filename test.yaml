@@ -115,7 +115,7 @@ proxy-providers:
 
   Trojan-SG4:
     type: http
-    url: "https://cdn.jsdelivr.net/gh/demarcush/breakfree@master/release/Meta/meta-ir-sfw.yaml"
+    url: "https://cdn.jsdelivr.net/gh/yebekhe/TVC@main/subscriptions/meta/mix"
     interval: 3600
     path: ./trojan_sg4.yaml
     health-check:
