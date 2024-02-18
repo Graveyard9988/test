@@ -143,6 +143,5 @@ rules:
   - DOMAIN-SUFFIX,ir,DIRECT
   - DOMAIN-KEYWORD,snapp,DIRECT
   - GEOIP,private,DIRECT,no-resolve
-  - GEOSITE,ir,DIRECT
   - GEOIP,ir,DIRECT
   - MATCH,♻️Auto
