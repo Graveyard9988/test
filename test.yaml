@@ -105,7 +105,7 @@ proxy-providers:
 
   Trojan-SG3:
     type: http
-    url: "https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/main/sub.txt"
+    url: "https://raw.githubusercontent.com/Kwinshadow/TelegramV2rayCollector/main/sublinks/b64vless.txt"
     interval: 3600
     path: ./trojan_sg3.yaml
     health-check:
@@ -115,7 +115,7 @@ proxy-providers:
 
   Trojan-SG4:
     type: http
-    url: "https://cdn.jsdelivr.net/gh/yebekhe/TVC@main/subscriptions/meta/mix"
+    url: "https://raw.githubusercontent.com/Mahdi0024/ProxyCollector/master/sub/proxies.txt"
     interval: 3600
     path: ./trojan_sg4.yaml
     health-check:
