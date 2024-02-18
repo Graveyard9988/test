@@ -52,7 +52,6 @@ tun:
   auto-route: true
   auto-detect-interface: true
   strict-route: true
-  strict-route: true
   gso: true
   gso-max-size: 65536
   udp-timeout: 300
