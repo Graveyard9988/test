@@ -95,7 +95,7 @@ proxy-providers:
 
   Trojan-SG2:
     type: http
-    url: "https://neko-warp.nloli.xyz/neko_warp.yaml"
+    url: "https://raw.githubusercontent.com/v2clash/V2ray-Configs/main/Splitted-By-Protocol/vless.txt"
     interval: 3600
     path: ./trojan_sg2.yaml
     health-check:
