@@ -10,6 +10,8 @@ experimental:
   sniff-tls-sni: true
 hosts:
   "localhost": 127.0.0.1
+find-process-mode: strict
+tcp-concurrent: true
 
 profile:
   store-selected: true
@@ -20,7 +22,7 @@ profile:
   sniff:
     http: { ports: [1-442, 444-8442, 8444-65535], override-destination: true }
     tls: { ports: [1-79, 81-8079, 8081-65535], override-destination: true }
-    #quic: { ports: [443, 8443], override-destination: true }
+    quic: { ports: [443, 8443], override-destination: true }
   force-domain:
       - "+.v2ex.com"
       - www.google.com
@@ -42,14 +44,19 @@ tun:
   enable: true
   prefer-h3: true 
   listen: 0.0.0.0:53 
-  stack: gvisor 
+  stack: mixed
   dns-hijack:
      - "any:53"
      - "tcp://any:53"
   auto-redir: true
   auto-route: true
   auto-detect-interface: true
-  strict-route: false
+  strict-route: true
+  strict-route: true
+  gso: true
+  gso-max-size: 65536
+  udp-timeout: 300
+  endpoint-independent-nat: false
   inet4-route-address:
     - 0.0.0.0/1
     - 128.0.0.0/1
@@ -96,7 +103,7 @@ proxy-providers:
 
   Trojan-SG3:
     type: http
-    url: "https://raw.githubusercontent.com/taijichadao/taijichadao.github.io/main/json/Warp.txt"
+    url: "https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/main/sub.txt"
     interval: 3600
     path: ./trojan_sg3.yaml
     health-check:
