@@ -12,6 +12,11 @@ hosts:
   "localhost": 127.0.0.1
 find-process-mode: strict
 tcp-concurrent: true
+geodata-mode: true
+geox-url:
+  geoip: "https://github.com/chocolate4u/Iran-v2ray-rules/releases/latest/download/geoip.dat"
+  geosite: "https://github.com/chocolate4u/Iran-v2ray-rules/releases/latest/download/geosite.dat"
+  mmdb: "https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/geoip.metadb"
 
 profile:
   store-selected: true
@@ -137,5 +142,17 @@ rules:
   - DOMAIN-SUFFIX,localhost,DIRECT
   - DOMAIN-SUFFIX,ir,DIRECT
   - DOMAIN-KEYWORD,snapp,DIRECT
-
+  - GEOIP,private,DIRECT,no-resolve
+  - GEOSITE,category-ads-all,REJECT
+  - GEOSITE,malware,REJECT
+  - GEOSITE,phishing,REJECT
+  - GEOSITE,cryptominers,REJECT
+  - GEOIP,malware,REJECT
+  - GEOIP,phishing,REJECT
+  - GEOSITE,ir,DIRECT
+  - GEOIP,ir,DIRECT
+  - GEOIP,arvancloud,DIRECT
+  - GEOIP,derakcloud,DIRECT
+  - GEOIP,iranserver,DIRECT
+  - GEOIP,parspack,DIRECT
   - MATCH,♻️Auto
