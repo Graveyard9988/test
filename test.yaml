@@ -136,9 +136,7 @@ rule-providers:
   malware: {type: http, format: text, behavior: domain, path: ./ruleset/malware.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/malware.txt, interval: 86400}
   phishing: {type: http, format: text, behavior: domain, path: ./ruleset/phishing.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/phishing.txt, interval: 86400}
   cryptominers: {type: http, format: text, behavior: domain, path: ./ruleset/cryptominers.txt, url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/cryptominers.txt, interval: 86400}
-  YouTube: {type: http, behavior: classical, path: ./ruleset/YouTube.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml, interval: 86400}
-  YouTubeMusic: {type: http, behavior: classical, path: ./ruleset/YouTubeMusic.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTubeMusic/YouTubeMusic.yaml, interval: 86400}
-  Instagram: {type: http, behavior: classical, path: ./ruleset/Instagram.yaml, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Instagram/Instagram.yaml, interval: 86400}
+
 
 rules:
   - DOMAIN-SUFFIX,local,DIRECT
