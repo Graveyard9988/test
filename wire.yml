@@ -44,20 +44,26 @@ tun:
   enable: true
   prefer-h3: true 
   listen: 0.0.0.0:53 
-  stack: gvisor 
+  stack: gvisor
   dns-hijack:
      - "any:53"
      - "tcp://any:53"
   auto-redir: true
   auto-route: true
   auto-detect-interface: true
-  strict-route: false
+  strict-route: true
+  gso: true
+  gso-max-size: 65536
+  udp-timeout: 300
+  endpoint-independent-nat: false
   inet4-route-address:
-    - 0.0.0.0/1
-    - 128.0.0.0/1
+    - '0.0.0.0/1'
+    - '128.0.0.0/1'
   inet6-route-address:
-    - '::/1'
-    - '8000::/1'
+    - "::/1"
+    - "8000::/1"
+  exclude-package:
+    - com.android.captiveportallogin
 
 
 
