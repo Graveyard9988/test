@@ -150,6 +150,7 @@ rules:
   - DOMAIN-SUFFIX,lan,DIRECT
   - DOMAIN-SUFFIX,localhost,DIRECT
   - DOMAIN-SUFFIX,ir,DIRECT
+  - DOMAIN-SUFFIX,om,DIRECT
   - DOMAIN-KEYWORD,snapp,DIRECT
   - OR,((DOMAIN,d.metacubex.one),(DOMAIN,yacd.haishan.me),(DOMAIN,clash.metacubex.one),(DOMAIN,clash.razord.top)),DIRECT
   - OR,((RULE-SET,YouTube),(RULE-SET,YouTubeMusic),(RULE-SET,Instagram)),global
@@ -165,4 +166,5 @@ rules:
   - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(RULE-SET,Instagram)))),REJECT
   - AND,((NETWORK,udp),(RULE-SET,Instagram)),REJECT
   - OR,((RULE-SET,ir),(RULE-SET,ircidr),(RULE-SET,apps),(RULE-SET,private)),DIRECT
+  - GEOIP,OM,DIRECT
   - MATCH,♻️Auto
